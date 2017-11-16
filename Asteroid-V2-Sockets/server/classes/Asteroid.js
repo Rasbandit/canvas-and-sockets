@@ -14,21 +14,22 @@ module.exports = class Asteroid extends Polygon {
 
     this.scale(size);
 
-    this.rotationSpeed = 0.01 * ((Math.random() * 2) + 1);
+    this.rotationSpeed = 0.02 * ((Math.random() * 2) - 1);
 
     if(Math.random() > 0.5) {
       this.rotationSpeed = -this.rotationSpeed;
     }
 
     const direction = 2 * Math.PI * Math.random();
-    const speed = Math.random() + 0.75;
+    const speed = Math.random() + 1;
     this.velocity = {
-      x: Math.floor(speed * Math.cos(direction)),
-      y: Math.floor(speed * Math.sin(direction))
+      x: +(speed * Math.cos(direction)).toFixed(2),
+      y: +(speed * Math.sin(direction)).toFixed(2)
     };
   }
 
   update() {
+    // console.log(this.x, this.y);
     this.x += this.velocity.x;
     this.y += this.velocity.y;
 
@@ -47,7 +48,7 @@ module.exports = class Asteroid extends Polygon {
     this.rotate(this.rotationSpeed);
   }
 
-  draw(ctx) {
-    ctx.drawPolygon(this, this.x, this.y);
+  hasPoint(x, y) {
+    return this.hasPoints(this.x, this.y, x, y);
   }
 };

@@ -10,10 +10,9 @@ app.use(express.static(path.join(__dirname, './../public')));
 
 const mainCtrl = require('./controllers/mainCtrl');
 
-const chat = io
-  .on('connection', (socket) => {
-    mainCtrl.respond(chat, socket);
-  });
+const chat = io.on('connection', socket => {
+  mainCtrl.respond(chat, socket);
+});
 
 http.listen(3000, () => {
   console.log('listening on port 3000');

@@ -1,12 +1,7 @@
 import State from './State';
 import Ship from './Ship';
 
-
 export default class GameState extends State {
-  constructor(game) {
-    super(game);
-  }
-
   render(ctx) {
     ctx.clearAll();
     ctx.vectorText(this.score, 3, 20, 10);
@@ -16,7 +11,7 @@ export default class GameState extends State {
     }
 
     this.bullets.forEach(bullet => bullet.draw(ctx));
-    this.asteroids.forEach((asteroid) => {
+    this.asteroids.forEach(asteroid => {
       asteroid.draw(ctx);
     });
     this.ship.draw(ctx);

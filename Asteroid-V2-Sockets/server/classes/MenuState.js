@@ -1,8 +1,9 @@
-export default class State {
+const Polygon = require('./Polygon');
+
+module.exports = class State {
   constructor(game) {
     this.game = game;
   }
-  update() {
-
-  }
-}
+  handleInputs(input) {}
+  update() {}
+};

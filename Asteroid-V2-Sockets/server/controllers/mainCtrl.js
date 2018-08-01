@@ -16,23 +16,20 @@ module.exports.respond = function name(io, socket) {
 
   game.state.currentState.explosion = explosion;
 
-
-  socket.on('keyDown', (key) => {
+  socket.on('keyDown', key => {
     game.state.input.keyDown(key);
   });
 
-  socket.on('keyUp', (key) => {
+  socket.on('keyUp', key => {
     game.state.input.keyUp(key);
   });
 
-  socket.on('fire', ((position) => {
-    if(game.state.currentState.ship.visible) {
+  socket.on('fire', position => {
+    if (game.state.currentState.ship.visible) {
       game.state.currentState.bullets.push(game.state.currentState.ship.shoot(position));
       socket.emit('fireSound');
     }
-  }));
-
-  socket.on('disconnect', () => {
-
   });
+
+  socket.on('disconnect', () => {});
 };

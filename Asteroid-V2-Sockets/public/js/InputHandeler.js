@@ -12,13 +12,13 @@ export default class InputHandeler {
       this.pressed[key] = false;
     }
 
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', event => {
       if (this.keys[event.keyCode] && this.down[this.keys[event.keyCode]] === false) {
         socket.emit('keyDown', event.keyCode);
       }
     });
 
-    document.addEventListener('keyup', (event) => {
+    document.addEventListener('keyup', event => {
       if (this.keys[event.keyCode]) {
         socket.emit('keyUp', event.keyCode);
       }
@@ -30,7 +30,7 @@ export default class InputHandeler {
   }
 
   isPressed(key) {
-    if(this.pressed[key]) {
+    if (this.pressed[key]) {
       return false;
     } else if (this.down[key]) {
       this.pressed[key] = true;

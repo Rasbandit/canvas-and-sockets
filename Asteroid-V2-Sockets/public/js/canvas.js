@@ -6,11 +6,11 @@ export default class Canvas {
     this.canvas.width = width;
     this.canvas.height = height;
 
-    this.ctx = (function (ctx) {
+    this.ctx = (function(ctx) {
       ctx.width = ctx.canvas.width;
       ctx.height = ctx.canvas.height;
 
-      ctx.drawPolygon = function (polygon, x, y) {
+      ctx.drawPolygon = function(polygon, x, y) {
         const { points } = polygon;
         this.beginPath();
         this.moveTo(points[0] + x, points[1] + y);
@@ -20,7 +20,7 @@ export default class Canvas {
         this.stroke();
       };
 
-      ctx.clearAll = function () {
+      ctx.clearAll = function() {
         this.clearRect(0, 0, this.width, this.height);
       };
 
@@ -28,8 +28,11 @@ export default class Canvas {
       ctx.ZCODE = '0'.charCodeAt(0);
       ctx.SCODE = ' '.charCodeAt(0);
 
-      ctx.vectorText = function (text, s, xCoordinate, yCoordinate) {
-        text = text.toString().toUpperCase().split('');
+      ctx.vectorText = function(text, s, xCoordinate, yCoordinate) {
+        text = text
+          .toString()
+          .toUpperCase()
+          .split('');
         const step = s * 6;
 
         if (typeof xCoordinate !== 'number') {
@@ -39,7 +42,7 @@ export default class Canvas {
         xCoordinate += 0.5;
         yCoordinate += 0.5;
 
-        text.forEach((character) => {
+        text.forEach(character => {
           const charCode = character.charCodeAt(0);
           if (charCode === this.SCODE) {
             xCoordinate += step;
@@ -62,18 +65,18 @@ export default class Canvas {
       };
 
       return ctx;
-    }(this.canvas.getContext('2d')));
+    })(this.canvas.getContext('2d'));
 
     document.body.appendChild(this.canvas);
   }
 
   animate(loop) {
-    const rf = (() => window.requestAnimationFrame ||
+    const rf = (() =>
+      window.requestAnimationFrame ||
       window.webkitRequestAnimationFrame ||
       window.mozRequestAnimationFrame ||
       window.oRequestAnimationFrame ||
-      window.msRequestAnimationFrame
-    )();
+      window.msRequestAnimationFrame)();
 
     const looper = () => {
       loop();
